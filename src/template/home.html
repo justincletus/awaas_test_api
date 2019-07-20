@@ -7,7 +7,15 @@
 <p>This is from template home page</p>
 <h2> Testing from gitlab ide</h2>
 
+{% load bootstrap4 %}
 
+{# Display a form #}
+
+<form action="/your-name/" method="post">
+    <label for="your_name">Your name: </label>
+    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <input type="submit" value="OK">
+</form>
 
 {% endblock %}
 

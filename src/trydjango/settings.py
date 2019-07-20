@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # custom app
     'products',
     'pages',
+    'bootstrap4',
 
 ]
 
