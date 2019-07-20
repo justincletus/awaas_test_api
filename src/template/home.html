@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Hello World</h2>
+{{ request.user.is_authenticated }}
+
+<p>{% now "f" %} </p>
+<p>This is from template home page</p>
+
+
+
+{% endblock %}
+
