@@ -1,4 +1,6 @@
 from django.http import HttpResponse
+from django.urls import reverse
+# from django.core.urlresolvers import resolve
 from django.shortcuts import render
 from django.template import loader
 
@@ -8,8 +10,10 @@ from django.template import loader
 def home_view(request, *args, **kwargs):
     # return HttpResponse("<h1>Hello World.</h1>")
     # template = loader.get_template('template/home.html')
+
+    appName = 'smartUniv'
     print(request.user)
-    return render(request, "home.html", {})
+    return render(request, "home.html", {'appName': appName})
 
 
 def contact_view(request, *args, **kwargs):
@@ -19,5 +23,8 @@ def contact_view(request, *args, **kwargs):
 
 def about_view(request, *args, **kwargs):
     return render(request, "about.html", {})
+
+def appname(request):
+    return {'appname': reverse(request.path).app_name}
 
 
