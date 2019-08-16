@@ -1,25 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
-
 {% block content %}
-
-{{ request.user.is_authenticated }}
-
-<p>{% now "f" %} </p>
-<p>This is from template home page</p>
-<h2 id="custom-h2">Hello</h2>
-
-{{ STATIC_ROOT }}
-
-{# Display a form #}
-
-<form action="/your-name/" method="post">
-    <label for="your_name">Your name: </label>
-    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
-    <input type="submit" value="OK">
-</form>
 
 {% endblock %}
 

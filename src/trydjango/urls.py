@@ -15,22 +15,33 @@ Including another URLconf
 """
 # from django.urls import path
 
-
 from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from core import views as core_views
+from django.contrib.auth import views as auth_views
 
 
-from pages.views import home_view, contact_view, about_view
+from pages.views import (
+    home_view,
+    contact_view,
+    about_view
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view, name='home'),
+    path('', home_view, name='homepage'),
     path('contact/', contact_view, name="contact"),
     path('about/', about_view, name='about'),
-    # path(r'^', include('pages.urls', app_name="smartUniv")),
+    path('signup/', core_views.signup, name='signup'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
+
 ]
+
+# urlpatterns += staticfiles_urlpatterns()
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

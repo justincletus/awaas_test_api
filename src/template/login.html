@@ -1,0 +1,29 @@
+{% extends 'master.html' %}
+    {% block content %}
+    <dir class="col-md-6 col-md-4">
+            <h2>Login</h2>
+            <form action="." method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    <p>
+                        {{ field.label_tag }} <br>
+                        {{ field }} <br>
+                        {% if field.help_text %}
+                            <small style="color: gray">{{ field.help_text }} </small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                        <p style="color: red">
+                            {{ error }}
+                        </p>
+                        {% endfor %}
+                    </p>
+                {% endfor %}
+                <button type="submit">Log in</button>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Need an account? <a class="ml-2" href="{% url 'signup' %}">Sign up</a>
+                </small>
+            </div>
+    </dir>        
+    {% endblock %}
