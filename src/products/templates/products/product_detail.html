@@ -1,0 +1,15 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<div class="col-md-8 col-md-4">
+    <h4>In App Template: {{ object.title }} </h4>
+    <p>
+        {% if object.description != '' %}
+            {{ description }}
+        {% else %}
+            {{ 'Description coming soon.' }}
+        {% endif %}
+    </p>
+    <p>Price = Rs {{ object.price }}</p>
+</div>
+{% endblock %}
