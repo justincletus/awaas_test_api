@@ -19,8 +19,8 @@ def product_create_view(request):
     return render(request, 'products/product_create.html', context)
 
 # Update product view.
-def product_update_view(request, id):
-    obj = get_object_or_404(Product, id=id)
+def product_update_view(request, slug):
+    obj = get_object_or_404(Product, slug=slug)
     form = ProductForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
@@ -43,9 +43,9 @@ def product_list_view(request):
     return render(request, "products/product_list.html", context)
 
 # show specific product detail
-def product_detail_view(request, id):
+def product_detail_view(request, slug):
     try:
-        obj = Product.objects.get(id=id)
+        obj = Product.objects.get(slug=slug)
     except:
         raise Http404
     
@@ -56,8 +56,8 @@ def product_detail_view(request, id):
     return render(request, "products/product_detail.html", result)
 
 # delete product
-def product_delete_view(request, id):
-    obj = get_object_or_404(Product, id=id)
+def product_delete_view(request, slug):
+    obj = get_object_or_404(Product, slug=slug)
     if request.method == "POST":
         obj.delete()
         return redirect('../../')

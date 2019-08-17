@@ -13,7 +13,7 @@ app_name = 'products'
 urlpatterns = [
     path('', product_list_view, name="product-list"),
     path('create/', product_create_view, name="product-create"),
-    path('<int:id>/', product_detail_view, name="product-detail"),
-    path('<int:id>/update/', product_update_view, name="product-update"),
-    path('<int:id>/delete/', product_delete_view, name="product-delete"),    
+    path('<slug:slug>/', product_detail_view, name="product-detail"),
+    path('<slug:slug>/update/', product_update_view, name="product-update"),
+    path('<slug:slug>/delete/', product_delete_view, name="product-delete"),    
 ]
