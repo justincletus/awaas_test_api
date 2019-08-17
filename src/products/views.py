@@ -4,7 +4,7 @@ from .models import Product
 from .forms import ProductForm
 
 
-# Create your views here.
+# Create product view.
 def product_create_view(request):
     form = ProductForm(request.POST or None)
     if form.is_valid():
@@ -18,7 +18,7 @@ def product_create_view(request):
 
     return render(request, 'products/product_create.html', context)
 
-# Create your views here.
+# Update product view.
 def product_update_view(request, id):
     obj = get_object_or_404(Product, id=id)
     form = ProductForm(request.POST or None, instance=obj)
@@ -32,6 +32,7 @@ def product_update_view(request, id):
 
     return render(request, 'products/product_create.html', context)
 
+# List all products
 def product_list_view(request):
     queryset = Product.objects.all()
 
@@ -41,6 +42,7 @@ def product_list_view(request):
 
     return render(request, "products/product_list.html", context)
 
+# show specific product detail
 def product_detail_view(request, id):
     try:
         obj = Product.objects.get(id=id)
@@ -53,6 +55,7 @@ def product_detail_view(request, id):
 
     return render(request, "products/product_detail.html", result)
 
+# delete product
 def product_delete_view(request, id):
     obj = get_object_or_404(Product, id=id)
     if request.method == "POST":

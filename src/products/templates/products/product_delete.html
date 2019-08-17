@@ -1,10 +1,7 @@
 {% extends 'master.html' %}
-
 {% block content %}
-<form action="." method="POST"> {% csrf_token %}
-    <h2>Do you want delete the product {{ object.title }}</h2>
-    <p><input type="submit" value="Yes" /><a href="../">cancel</a> </p>
-</form>
-
-
+    <form action="." method="POST"> {% csrf_token %}
+        <h2>Do you want delete the product {{ object.title }}</h2>
+        <p><input type="submit" value="Yes" /><a href="../">cancel</a> </p>
+    </form>
 {% endblock %}

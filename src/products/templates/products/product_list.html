@@ -1,10 +1,6 @@
 {% extends 'master.html' %}
-
 {% block content %}
-
-{% for instance in object_list %}
-    <p> {{ instance.id }} <a href="{{ instance.get_absolute_url }}">- {{ instance.title }}</a></p>
-{% endfor %}
-
-
+    {% for instance in object_list %}
+        <p> {{ instance.id }} <a href="{{ instance.get_absolute_url }}">- {{ instance.title }}</a></p>
+    {% endfor %}
 {% endblock %}
