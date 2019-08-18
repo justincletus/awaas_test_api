@@ -1,14 +1,18 @@
 {% extends 'master.html' %}
 {% block content %}
-<div class="col-md-8 col-md-4">
-    <h4>In App Template: {{ object.title }} </h4>
-    <p>
-        {% if object.description != '' %}
-            {{ description }}
-        {% else %}
-            {{ 'Description coming soon.' }}
-        {% endif %}
-    </p>
-    <p>Price = Rs {{ object.price }}</p>
+<div class="row">
+    <div class="col-sm-12">
+        <h4>In App Template: {{ object.title }} </h4>
+        <p>
+            {% if object.description != '' %}
+                {{ description }}
+            {% else %}
+                {{ 'Description coming soon.' }}
+            {% endif %}
+        </p>
+        <p>Price = Rs {{ object.price }}</p>
+        <img src="{{ object.product_image.url }}" class="img-responsive" alt="image-{{ object.title }}">
+    </div>
 </div>
+
 {% endblock %}

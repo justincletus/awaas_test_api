@@ -6,7 +6,7 @@ from .forms import ProductForm
 
 # Create product view.
 def product_create_view(request):
-    form = ProductForm(request.POST or None)
+    form = ProductForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
         form = ProductForm()
@@ -21,7 +21,7 @@ def product_create_view(request):
 # Update product view.
 def product_update_view(request, slug):
     obj = get_object_or_404(Product, slug=slug)
-    form = ProductForm(request.POST or None, instance=obj)
+    form = ProductForm(request.POST or None, request.FILES or None, instance=obj)
     if form.is_valid():
         form.save()
         return redirect('../../')

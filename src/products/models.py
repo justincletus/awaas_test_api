@@ -8,16 +8,21 @@ STATUS_CHOICES = (
     ('published', 'Published'),
 )
 
+def upload_location(instance, filename):
+    return "%s/%s" %(instance.id, filename)
 # Create your models here.
 class Product(models.Model):
-    title        = models.CharField(max_length=120)
-    slug         = models.SlugField(unique=True)
-    description  = models.TextField(blank=True, null=True)
-    price        = models.DecimalField(decimal_places=2, max_digits=1000)
-    summary      = models.TextField(default='Some more summary')
-    featured     = models.BooleanField(default=True)
-    published_at = models.DateTimeField(auto_now_add=True)
-    updated      = models.DateTimeField(auto_now=True)
+    title         = models.CharField(max_length=120)
+    slug          = models.SlugField(unique=True)
+    description   = models.TextField(blank=True, null=True)    
+    price         = models.DecimalField(decimal_places=2, max_digits=1000)
+    summary       = models.TextField(default='Some more summary')
+    featured      = models.BooleanField(default=True)
+    published_at  = models.DateTimeField(auto_now_add=True)
+    updated       = models.DateTimeField(auto_now=True)
+    product_image = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
+    height_field  = models.IntegerField(default=0)
+    width_field   = models.IntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse("products:product-detail", kwargs={"slug": self.slug})
