@@ -2,7 +2,7 @@
 {% block content %}
 <div class="row">
     <div class="col-sm-12">
-        <h4>In App Template: {{ object.title }} </h4>
+        <h4>{{ object.title }} </h4>
         <p>
             {% if object.description != '' %}
                 {{ description }}
@@ -11,7 +11,9 @@
             {% endif %}
         </p>
         <p>Price = Rs {{ object.price }}</p>
-        <img src="{{ object.product_image.url }}" class="img-responsive" alt="image-{{ object.title }}">
+        {% if object.product_image %}
+            <img src="{{ object.product_image.url }}" class="img-responsive" alt="image-{{ object.title }}">
+        {% endif %}
     </div>
 </div>
 

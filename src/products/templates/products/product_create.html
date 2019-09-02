@@ -4,7 +4,55 @@
             <h2>Create new product: </h2>
             <form action="." method="POST" enctype="multipart/form-data"> {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" value="Save" />
+                <br><br>
+                Document Uplaod:
+                    <input type="file" name="image[]" id="files">
+                    <input type="hidden" name="url" id="url">
+                    <button type="button" onclick="uploadimage()">Upload</button><br><br>
+                <input type="submit" value="Save" onclick="uploadimage()" />
             </form>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+
+    <script>
+    // Set the configuration for your app
+    // TODO: Replace with your project's config object
+    var config = {
+        apiKey: 'AIzaSyBQTuC0K17SPBvnS0y8GpZMPVuyLvOUZS8',
+        authDomain: 'smartuniversity-247301.firebaseapp.com',
+        databaseURL: 'https://smartuniversity-247301.firebaseio.com',
+        storageBucket: 'smartuniversity-247301.appspot.com'
+    };
+    firebase.initializeApp(config);
+
+    // Get a reference to the database service
+    function uploadimage() {
+            // var database = firebase.database();
+            var storage = firebase.storage();
+            var file = document.getElementById('id_product_image').files[0];
+            var storageRef = firebase.storage().ref();
+            var thisref = storageRef.child(file.name).put(file);
+            // console.log(thisref);
+            thisref.on('state_changed', function(snapshot){
+                console.log('file uploaded successfully.');
+                alert('file uploaded successfully');
+            },
+            function(error) {
+
+            },
+            function() {
+                //uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                var downloadURL = thisref.snapshot.downloadURL;
+                    alert(downloadURL);
+                console.log('File available at', downloadURL);
+                document.getElementById('id_product_image').value = downloadURL;
+                alert('file uploaded successfully');
+
+            }
+            );
+
+
+        }
+
+    </script>
 {% endblock %}

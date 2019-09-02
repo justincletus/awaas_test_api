@@ -3,11 +3,24 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class SignupForm(UserCreationForm):
-    first_name = forms.CharField(max_length=50, required=False, help_text='Optional')
-    last_name = forms.CharField(max_length=50, required=False, help_text='Optional')
+    username = forms.CharField(max_length=120, required=True, help_text="Enter the username")
     email = forms.EmailField(max_length=254, help_text="Enter the valid email address")
-    birth_date = forms.DateField(help_text='Required. Format: yyyy-mm-dd')
+    # password1 = forms.PasswordInput(help_text="Enter your password")
+    password1 = forms.PasswordInput(attrs={'placeholder': 'Password', 'class': 'form-control'})
+    password2 = forms.PasswordInput(attrs={'placeholder': 'Confirm Password', 'class': 'form-control'})
+
+      
     class Meta:
         model = User
-        fields = ('username', 'birth_date', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = (
+            'username',            
+            'email',
+            'password1',
+            'password2'
+            )
+    
+    def __init__(self, *args, **kargs):
+        super(SignupForm, self).__init__(*args, **kargs)
+        # self.fields['password1'].widget = PasswordInput(attrs={'placeholder': 'Password', 'class': 'form-control'})
+        # self.fields['password2'].widget = PasswordInput(attrs={'placeholder': 'Confirm Password', 'class': 'form-control'})
 

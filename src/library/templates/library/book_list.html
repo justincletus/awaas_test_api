@@ -1,0 +1,43 @@
+{% extends 'master.html' %}
+{% block content %}
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    {% include 'layouts/side-bar.html' %}
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <br>
+            <h2>List of Books</h2>
+            {% if book_list %}
+            <ul>        
+                {% for book in book_list %}
+                <li>
+                <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> (author- {{book.author}})
+                </li>
+                {% endfor %}        
+            </ul>        
+            {% else %}
+                <p>There are no books in the library.</p>
+            {% endif %}
+            <hr>
+            <p>The library has the following record counts:</p>
+            <ul>
+                <li><strong>Books:</strong> {{ num_books }}</li>
+                <li><strong>Copies:</strong> {{ num_book_instances }}</li>
+                <li><strong>Copies available:</strong> {{ num_book_instance_available }}</li>
+                <li><strong>Authors:</strong> {{ num_authors }}</li>
+            </ul>
+            
+            <hr>
+            <p>You have visited this page {{ num_visits }} times.</p>
+            
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+    
+{% endblock %}

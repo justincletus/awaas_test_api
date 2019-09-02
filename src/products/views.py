@@ -8,6 +8,7 @@ from .forms import ProductForm
 def product_create_view(request):
     form = ProductForm(request.POST or None, request.FILES or None)
     if form.is_valid():
+        image = request.POST.get('product_image')
         form.save()
         form = ProductForm()
         return redirect('../')
