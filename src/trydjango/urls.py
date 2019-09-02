@@ -21,6 +21,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from core import views as core_views
 from django.contrib.auth import views as auth_views
+from djreservation import urls as djreservation_urls
+from django.conf.urls import url
+
 
 
 from pages.views import (
@@ -35,16 +38,22 @@ urlpatterns = [
     path('contact/', contact_view, name="contact"),
     path('about/', about_view, name='about'),
     path('signup/', core_views.signup, name='signup'),
-    path('profile/', core_views.profile, name='profile'),
+    path('accounts/profile/', core_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
-    path('products/', include('products.urls'))
+    path('products/', include('products.urls', namespace="products")),
+    path('library/', include('library.urls', namespace="library")),
+    path('core/', include('core.urls'))
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + djreservation_urls.urlpatterns
 
-# urlpatterns += staticfiles_urlpatterns()
+
+
+
+# urlpatterns += + djreservation_urls.urlpatterns
 
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

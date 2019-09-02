@@ -1,24 +1,44 @@
 {% extends 'master.html' %}
-    {% block content %}
-    <dir class="col-md-6 col-md-4">
-            <h2>Sign up</h2>
-            <form action="." method="POST">
-                {% csrf_token %}
-                {% for field in form %}
-                    <p>
-                        {{ field.label_tag }} <br>
-                        {{ field }} <br>
-                        {% if field.help_text %}
-                            <small style="color: gray">{{ field.help_text }} </small>
+{% load crispy_forms_tags %}
+<div class="container">
+        <div class="row justify-content-center">
+          <div class="col-8">
+            <h1 class="mt-2">Django People</h1>
+            <hr class="mt-0 mb-4">
+            {% block content %}
+            <div class="d-flex" id="wrapper">
+                <div class="container">
+                    <form action="." method="POST" class="form-horizontal">
+                        <h2>Sign up</h2>
+                        {% csrf_token %}               
+                        
+                        {% for field in form %}
+                        {% if field.errors %}
+                        <div class="control-group error">
+                            <label class="control-label">{{ field.label }}</label> 
+                            <div class="controls">{{ field }}
+                                <span class="help-inline">
+                                    {% for error in  field.errors %}{{ error }}{% endfor %}
+                                </span>
+                            </div>
+                        </div>
+                        {% else %}
+                            <div class="control-group">
+                                <label class="control-label">{{ field.label }}</label> 
+                                <div class="controls">{{ field }}
+                                    
+                                </div>
+                            </div>
                         {% endif %}
-                        {% for error in field.errors %}
-                        <p style="color: red">
-                            {{ error }}
-                        </p>
                         {% endfor %}
-                    </p>
-                {% endfor %}
-                <button type="submit">Sign up</button>
-            </form>
-    </dir>        
-    {% endblock %}
+                        <button type="submit">Sign up</button>
+                    </form>
+                </div>               
+                
+            </div>
+
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    

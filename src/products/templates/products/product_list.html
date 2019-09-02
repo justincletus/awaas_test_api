@@ -1,6 +1,17 @@
 {% extends 'master.html' %}
 {% block content %}
-    {% for instance in object_list %}
-        <p> {{ instance.id }} <a href="{{ instance.get_absolute_url }}">- {{ instance.title }}</a></p>
-    {% endfor %}
+<div class="row">
+    <div class="col-sm-12">
+        
+        {% for instance in object_list %}
+            <div class="thumbnail">
+                {% if instance.product_image %}
+                    <img src="{{ instance.product_image.url }}" class="img-responsive" alt="image-{{ instance.title }}">
+                {% endif %}
+            </div>
+            <p> {{ instance.id }} <a href="{{ instance.get_absolute_url }}">- {{ instance.title }}</a></p>
+        {% endfor %}
+    </div>
+</div>
+    
 {% endblock %}

@@ -15,16 +15,19 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
-    <link href="{% static "lib/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}">
 
 
     <!-- Libraries CSS Files -->
-    <link rel="stylesheet" href="{% static "lib/font-awesome/css/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'lib/font-awesome/css/bootstrap.min.css' %}"> -->
+   
     <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
     <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
     <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
     <link href="{% static 'lib/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
     <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/dt-1.10.10,r-2.0.0/datatables.min.css"/>
 
 
   <!-- =======================================================
@@ -45,7 +48,7 @@
   ======================================================= -->
 
     <!-- Main Stylesheet File -->
-  <link rel="stylesheet" href="{% static "css/style.css" %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
    <!--custom style css-->
     <link rel="stylesheet" href="/static/css/custom.css" />
@@ -66,7 +69,7 @@
             <a href="{% url 'profile' %}"><i class="fa fa-user-o" aria-hidden="true" title="Profile"></i></a>
             <a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true" title="Logout"></i></a>
             {% else %}
-            <a href="{% url 'login' %}"><i class="fa fa-user-circle" aria-hidden="true" title="Login"></i></a>
+            <a href="{% url 'login' %}?next={{request.path}}"><i class="fa fa-user-circle" aria-hidden="true" title="Login"></i></a>
             <a href="{% url 'signup' %}"><i class="fa fa-user-plus" aria-hidden="true" title="Register"></i></a>
             {% endif %}       
             
@@ -86,7 +89,7 @@
         <div class="container">
     
           <div id="logo" class="pull-left">
-            <h1><a href="/" class="scrollto">Smart<span>University</span></a></h1>
+            <h1><a href="/" class="scrollto">Smart <span>School</span></a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
           </div>
@@ -98,6 +101,7 @@
               <li><a href="/services/">Services</a></li>
               <li><a href="/portfolio/">Portfolio</a></li>
               <li><a href="/team/">Team</a></li>
+              <li><a href="/library/">Library</a></li>
               <li class="menu-has-children"><a href="">Drop Down</a>
                 <ul>
                   <li><a href="#">Drop Down 1</a></li>

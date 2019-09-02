@@ -1,7 +1,28 @@
 {% extends 'master.html' %}
-    {% block content %}
-    <div>
-        <h2> {{ user.username }} </h2>
-    </div>
-        
-    {% endblock %}
+
+{% block content %}
+<div class="d-flex" id="wrapper">
+    
+     <!-- Sidebar -->
+     {% include 'layouts/side-bar.html' %}
+        <!-- /#sidebar-wrapper -->
+    
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <p> {{ profile.user|title }} your dashboard.</p>
+
+                <h2>List of available books</h2>
+                <hr> 
+
+            </div>
+        </div>
+    
+</div>
+{% endblock %}
+
+{% block jquery %}
+    
+{% endblock %}
+
+

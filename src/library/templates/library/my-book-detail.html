@@ -1,0 +1,57 @@
+{% extends 'master.html' %}
+{% block content %}
+<div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        {% include 'layouts/side-bar.html' %}
+           <!-- /#sidebar-wrapper -->
+       
+           <!-- Page Content -->
+           <div id="page-content-wrapper">
+               <div class="container-fluid">
+                   <br>
+                   
+               <h2>User Borrowed Book details</h2> 
+                            
+
+               <table class="table">
+                   <thead>
+                       <tr>
+                           <!-- <th scope="col">#</th> -->
+                           <th>Title</th>
+                           <th>Renew Book</th>
+                           <th>Book Due</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                    {% if object is not None %} 
+                    {% for book in object %}                        
+                        <tr>
+                            <!-- <th scope="row"></th> -->
+                            <td>{{ book.book }} </td>
+                            <td> <a href="/library/prebooking/{{ book.id }}">Renew </a></td>
+                            <td class="{% if book.status == 'a' %}
+                            text-success
+                            {% elif book.status == 'd' %}
+                            text-danger
+                            {% else %}
+                            text-warning
+                            {% endif %}"> {{ book.due_back }}</td>                         
+                            <td></td>
+                        </tr>
+                    {% endfor %}                      
+                       
+                       
+                   </tbody>
+               </table>
+               <!-- {{ object }} -->
+               {% else %}
+                    <p>User {{ user.username }} do not any books</p>
+                {% endif %}            
+                           
+               </div>
+           </div>
+       
+</div>
+
+    
+{% endblock %}
