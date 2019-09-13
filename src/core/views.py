@@ -58,7 +58,7 @@ def signup(request):
             
             email.send()
             context = {
-                "messages": "Please confirm your email address to complete the registration."
+                "message": "Please confirm your email address to complete the registration."
             }
             return render(request, 'core/send_email.html', context)
 
