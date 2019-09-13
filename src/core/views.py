@@ -100,12 +100,12 @@ def activate(request, uidb64, token):
             profile.save()
 
             context = {
-                "messages": "Thank you for your email confirmation. Now you can login your account."
+                "message": "Thank you for your email confirmation. Now you can login your account."
             }
             return render(request, 'core/send_email.html', context)
         else:
             context = {
-                "messages": "access denied."
+                "message": "access denied."
             }
             return render(request, 'core/send_email.html', context) 
            
