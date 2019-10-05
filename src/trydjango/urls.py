@@ -1,41 +1,34 @@
-"""trydjango URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# from django.urls import path
+smart university all url lists.
+"""
+
 
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import re_path, url
 from django.conf import settings
 from django.conf.urls.static import static
 from core import views as core_views
 from django.contrib.auth import views as auth_views
 from djreservation import urls as djreservation_urls
-from django.conf.urls import url
-
+from rest_framework import routers
+from contact import views as contact_views
+from content import views as content_views
 
 
 from pages.views import (
     home_view,
-    contact_view,
     about_view
 )
+
+router = routers.DefaultRouter()
+# router.register(r'contact', contact_views.contact_collection)
+router.register(r'contact', contact_views.ContactViewSet)
+router.register(r'content', content_views.ContentViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='homepage'),
-    path('contact/', contact_view, name="contact"),
     path('about/', about_view, name='about'),
     path('signup/', core_views.signup, name='signup'),
     path('accounts/profile/', core_views.profile, name='profile'),
@@ -43,7 +36,11 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('products/', include('products.urls', namespace="products")),
     path('library/', include('library.urls', namespace="library")),
-    path('core/', include('core.urls'))
+    path('core/', include('core.urls')),
+    re_path(r'^', include(router.urls)),
+    re_path(r'^contact/', include('contact.urls')),
+    re_path(r'^content/', include('content.urls')),
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + djreservation_urls.urlpatterns
 
