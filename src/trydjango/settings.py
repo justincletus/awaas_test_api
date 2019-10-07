@@ -38,6 +38,10 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = []
 
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:4200",
+    "http://127.0.0.1:4200"
+]
 
 # Application definition
 
@@ -58,7 +62,11 @@ INSTALLED_APPS = [
     'library',
     'djreservation',
     'crispy_forms',
-    'core'
+    'core',
+    'corsheaders',
+    'rest_framework',
+    'contact',
+    'content'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -72,6 +80,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'djreservation.middleware.ReservationMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'trydjango.urls'
@@ -93,6 +102,28 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'trydjango.wsgi.application'
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework.authentication.TokenAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#     ),
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+#     ),
+#
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+#     'PAGE_SIZE': 10
+# }
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10
+}
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',

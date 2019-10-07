@@ -8,16 +8,13 @@ from django.template import loader
 
 
 def home_view(request, *args, **kwargs):
-    # return HttpResponse("<h1>Hello World.</h1>")
-    # template = loader.get_template('template/home.html')
-
     appName = 'smartUniv'
     print(request.user)
     return render(request, "home.html", {'appName': appName})
 
 
-def contact_view(request, *args, **kwargs):
-    return render(request, "contact.html", {})
+# def contact_view(request, *args, **kwargs):
+#     return render(request, "contact.html", {})
     # return HttpResponse("<h2>I am contact page </h2>")
 
 
