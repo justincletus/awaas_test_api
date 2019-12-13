@@ -10,14 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
-import os
+import os, datetime
 from decouple import config
 
 # TEST_SECRET_KEY = config('SECRET_KEY')
 
 DATABASE_HOST = config('DB_HOST')
 DATABASE_NAME = 'smartuniversitydb'
-DATABASE_USER = 'smartuser'
+DATABASE_USER = 'postgres'
 DATABASE_PASS = 'PassWord'
 
 # LOGGING_DIR = '/home/jibran/logs'
@@ -66,7 +66,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'contact',
-    'content'
+    'content',
+    'api',
+    'microblog'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -117,9 +119,14 @@ WSGI_APPLICATION = 'trydjango.wsgi.application'
 # }
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10
@@ -129,6 +136,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'pages.views.appname',
 )
+
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3600),
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -142,6 +154,13 @@ DATABASES = {
         'PORT': '5433',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -223,11 +242,3 @@ ACCOUNT_SIGNUP_FORM_CLASS = "core.forms.SignupForm"
 
 # AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 # AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-
-
-
-
-
-
-
-

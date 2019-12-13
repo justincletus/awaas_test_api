@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets
-from.models import Contact
+from .models import Contact
 from .serializers import ContactSerializer, ContactMiniSerializer
 from rest_framework.response import Response
 from django.utils.decorators import method_decorator
@@ -19,4 +19,3 @@ class ContactViewSet(viewsets.ModelViewSet):
         contacts = Contact.objects.all()
         serializer = ContactMiniSerializer(contacts, many=True)
         return Response(serializer.data)
-

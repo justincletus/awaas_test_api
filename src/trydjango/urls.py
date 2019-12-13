@@ -1,8 +1,6 @@
 """
 smart university all url lists.
 """
-
-
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import re_path, url
@@ -14,6 +12,9 @@ from djreservation import urls as djreservation_urls
 from rest_framework import routers
 from contact import views as contact_views
 from content import views as content_views
+# from api import views as api_views
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+
 
 
 from pages.views import (
@@ -25,6 +26,7 @@ router = routers.DefaultRouter()
 # router.register(r'contact', contact_views.contact_collection)
 router.register(r'contact', contact_views.ContactViewSet)
 router.register(r'content', content_views.ContentViewSet)
+# router.register(r'api', api_views.UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,7 +42,11 @@ urlpatterns = [
     re_path(r'^', include(router.urls)),
     re_path(r'^contact/', include('contact.urls')),
     re_path(r'^content/', include('content.urls')),
-    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    re_path(r'^api/', include('api.urls')),
+    re_path(r'^posts/', include('microblog.urls')),
+    path(r'api-token-auth/', obtain_jwt_token),
+    path(r'api-token-refresh/', refresh_jwt_token),
+    # re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + djreservation_urls.urlpatterns
 
