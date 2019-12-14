@@ -38,7 +38,7 @@ SECRET_KEY = 'zgi#y!g#r(*=4(rzw4+-lg1u(4g@1wkckwuzoi45ephq)u+u^6'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = [
-    'http://34.67.61.78',
+    '34.67.61.78',
     'www.gosmartuniversity.com',
     'gosmartuniversity.com'
 ]
