@@ -37,7 +37,11 @@ SECRET_KEY = 'zgi#y!g#r(*=4(rzw4+-lg1u(4g@1wkckwuzoi45ephq)u+u^6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'http://34.67.61.78',
+    'www.gosmartuniversity.com',
+    'gosmartuniversity.com'
+]
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:4200",
