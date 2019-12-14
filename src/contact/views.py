@@ -11,8 +11,7 @@ from .forms import ContactForm
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class ContactViewSet(viewsets.ModelViewSet, generics.GenericAPIView):
-    authentication_classes = []
+class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
 
