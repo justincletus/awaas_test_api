@@ -16,9 +16,10 @@ from decouple import config
 # TEST_SECRET_KEY = config('SECRET_KEY')
 
 DATABASE_HOST = config('DB_HOST')
-DATABASE_NAME = 'smartuniversitydb'
-DATABASE_USER = 'postgres'
-DATABASE_PASS = 'PassWord'
+DATABASE_HOST_PORT = config('DB_PORT')
+DATABASE_NAME = config('DB_NAME')
+DATABASE_USER = config('DB_USERNAME')
+DATABASE_PASS = config('DB_PASS')
 
 # LOGGING_DIR = '/home/jibran/logs'
 
@@ -151,7 +152,8 @@ DATABASES = {
         'NAME': DATABASE_NAME,
         'USER': DATABASE_USER,
         'PASSWORD': DATABASE_PASS,
-        'PORT': '5433',
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_HOST_PORT,
     }
 }
 
