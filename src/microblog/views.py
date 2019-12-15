@@ -2,10 +2,16 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets, permissions
 from .models import BlogPost
+from . import serializers
 from .serializers import BlogPostSerializer
 from .permissions import ReadOnly
 
 # Create your views here.
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = serializers.UserSerializer
+    permission_classes = (ReadOnly,)
 
 def index(request, path=''):
     return render(request, 'index.html')
@@ -14,7 +20,7 @@ class BlogPostViewSet(viewsets.ModelViewSet):
 
     #Provides basic CRUD functions for the Blog Post Model
     queryset = BlogPost.objects.all()
-    serializer_class = BlogPostSerializer
+    serializer_class = serializers.BlogPostSerializer
     permissions_class = (permissions.IsAuthenticatedOrReadOnly,)
 
 

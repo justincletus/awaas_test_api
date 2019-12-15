@@ -43,7 +43,8 @@ urlpatterns = [
     re_path(r'^contact/', include('contact.urls')),
     re_path(r'^content/', include('content.urls')),
     re_path(r'^api/', include('api.urls')),
-    re_path(r'^posts/', include('microblog.urls')),
+    # re_path(r'^posts/', include('microblog.urls')),
+    re_path(r'', include('microblog.urls')),
     path(r'api-token-auth/', obtain_jwt_token),
     path(r'api-token-refresh/', refresh_jwt_token),
     # re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
