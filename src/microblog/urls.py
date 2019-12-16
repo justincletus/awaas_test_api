@@ -11,4 +11,5 @@ urlpatterns = [
     path(r'api/', include(router.urls)),
     path(r'', views.index, name='index'),
     path('', include(router.urls)),
+    path('hello/', views.HelloView.as_view(), name="hello")
 ]
