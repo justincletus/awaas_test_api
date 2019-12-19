@@ -45,6 +45,8 @@ urlpatterns = [
     re_path(r'^api/', include('api.urls')),
     # re_path(r'^posts/', include('microblog.urls')),
     re_path(r'', include('microblog.urls')),
+    path('auth/', include('rest_auth.urls')),
+    path('auth/signup/', include('rest_auth.registration.urls')),
     path(r'api-token-auth/', obtain_jwt_token),
     path(r'api-token-refresh/', refresh_jwt_token),
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),

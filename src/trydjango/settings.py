@@ -73,7 +73,11 @@ INSTALLED_APPS = [
     'contact',
     'content',
     'api',
-    'microblog'
+    'microblog',
+    'allauth',
+    'allauth.account',
+    'rest_auth',
+    'rest_auth.registration',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -147,6 +151,8 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3600),
 }
+
+REST_USE_JWT = True
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
