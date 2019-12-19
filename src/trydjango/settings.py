@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth',
     'rest_auth.registration',
+    'allauth.socialaccount'
 ]
 
 SITE_ID = 1
