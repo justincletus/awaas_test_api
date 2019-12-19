@@ -40,12 +40,13 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = [
     '34.67.61.78',
     'www.gosmartuniversity.com',
-    'gosmartuniversity.com'
+    'gosmartuniversity.com',
+    '127.0.0.1'
 ]
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:4200",
-    "http://127.0.0.1:4200"
+    "http://127.0.0.1:4200",
 ]
 
 # Application definition
@@ -80,6 +81,8 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
 ]
+
+SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
