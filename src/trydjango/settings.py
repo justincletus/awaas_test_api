@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'content',
     'api',
     'microblog',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'rest_auth',
