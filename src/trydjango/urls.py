@@ -14,7 +14,7 @@ from contact import views as contact_views
 from content import views as content_views
 # from api import views as api_views
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
-
+from rest_framework_simplejwt import views as jwt_views
 
 
 from pages.views import (
@@ -45,8 +45,12 @@ urlpatterns = [
     re_path(r'^api/', include('api.urls')),
     # re_path(r'^posts/', include('microblog.urls')),
     re_path(r'', include('microblog.urls')),
+    path('auth/', include('rest_auth.urls')),
+    path('auth/signup/', include('rest_auth.registration.urls')),
     path(r'api-token-auth/', obtain_jwt_token),
     path(r'api-token-refresh/', refresh_jwt_token),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     # re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + djreservation_urls.urlpatterns

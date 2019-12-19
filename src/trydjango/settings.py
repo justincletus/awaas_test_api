@@ -40,12 +40,13 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = [
     '34.67.61.78',
     'www.gosmartuniversity.com',
-    'gosmartuniversity.com'
+    'gosmartuniversity.com',
+    '127.0.0.1'
 ]
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:4200",
-    "http://127.0.0.1:4200"
+    "http://127.0.0.1:4200",
 ]
 
 # Application definition
@@ -73,8 +74,16 @@ INSTALLED_APPS = [
     'contact',
     'content',
     'api',
-    'microblog'
+    'microblog',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth',
+    'rest_auth.registration',
+    'allauth.socialaccount'
 ]
+
+SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -132,6 +141,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10
@@ -146,6 +156,8 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3600),
 }
+
+REST_USE_JWT = True
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases

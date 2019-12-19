@@ -5,6 +5,9 @@ from .models import BlogPost
 from . import serializers
 from .serializers import BlogPostSerializer
 from .permissions import ReadOnly
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
@@ -26,4 +29,11 @@ class BlogPostViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user = self.request.user)
+
+class HelloView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        content = {'message': 'Hello, World'}
+        return Response(content)
 
