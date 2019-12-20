@@ -47,8 +47,8 @@ ALLOWED_HOSTS = [
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:4200",
     "http://127.0.0.1:4200",
-    "www.gosmartuniversity.com",
-    "gosmartuniversity.com"
+    "http://www.gosmartuniversity.com",
+    "http://gosmartuniversity.com"
 ]
 
 # Application definition
