@@ -14,7 +14,7 @@ import os, datetime
 from decouple import config
 
 # TEST_SECRET_KEY = config('SECRET_KEY')
-
+DATABASE_ENGINE = config('DB_ENGINE')
 DATABASE_HOST = config('DB_HOST')
 DATABASE_HOST_PORT = config('DB_PORT')
 DATABASE_NAME = config('DB_NAME')
@@ -82,7 +82,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth',
     'rest_auth.registration',
-    'allauth.socialaccount'
+    'allauth.socialaccount',
+    'country',
+    'university',
+    'colleges'
 ]
 
 SITE_ID = 2
@@ -166,7 +169,7 @@ REST_USE_JWT = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': DATABASE_ENGINE,
         'NAME': DATABASE_NAME,
         'USER': DATABASE_USER,
         'PASSWORD': DATABASE_PASS,

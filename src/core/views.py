@@ -22,33 +22,22 @@ def signup(request):
         form = SignupForm(request.POST)
         # print(form)
         if form.is_valid():
-            
-            user           = form.save()
-            # print(user) 
-            # username = form.cleaned_data.get('username')
-            # raw_password = form.cleaned_data.get('password1')
+            user = form.save()
 
-            # user = authenticate(username=username, password=raw_password)
-            
             user.refresh_from_db()
-            
-            user.profile.is_active = False            
-
+            user.profile.is_active = False
             token = account_activation_token.make_token(user)             
             user.profile.token = token
             user.is_active = False           
             user.profile.save()
-            print(user.profile.token)
-            # user.refresh_from_db()
             
             current_site = get_current_site(request)
-            # print(current_site)
             mail_subject = 'Activate your account.'
             message = render_to_string('core/acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
-                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':token,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': token,
             })
             
             to_email = form.cleaned_data.get('email')
@@ -98,7 +87,6 @@ def activate(request, uidb64, token):
             profile.is_active = True
             profile.email_confirmed = True
             profile.save()
-
             context = {
                 "message": "Thank you for your email confirmation. Now you can login your account."
             }
@@ -107,11 +95,8 @@ def activate(request, uidb64, token):
             context = {
                 "message": "access denied."
             }
-            return render(request, 'core/send_email.html', context) 
-           
+            return render(request, 'core/send_email.html', context)
         
     except(TypeError, ValueError, OverflowError):
         user = None
         return HttpResponse('Activation link is invalid!')
-
-        

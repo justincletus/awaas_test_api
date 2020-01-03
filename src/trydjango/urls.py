@@ -12,6 +12,9 @@ from djreservation import urls as djreservation_urls
 from rest_framework import routers
 from contact import views as contact_views
 from content import views as content_views
+from country import views as country_views
+from university import views as university_views
+from colleges import views as college_views
 # from api import views as api_views
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from rest_framework_simplejwt import views as jwt_views
@@ -26,6 +29,13 @@ router = routers.DefaultRouter()
 # router.register(r'contact', contact_views.contact_collection)
 router.register(r'contact', contact_views.ContactViewSet)
 router.register(r'content', content_views.ContentViewSet)
+router.register(r'country', country_views.CountryViewSet)
+router.register(r'state', country_views.StateViewSet)
+router.register(r'city', country_views.CityViewSet)
+router.register(r'urban', country_views.UrbanViewSet)
+router.register(r'university', university_views.UniversityViewSet)
+router.register(r'college', country_views.CountryViewSet)
+
 # router.register(r'api', api_views.UserViewSet)
 
 urlpatterns = [
@@ -42,7 +52,13 @@ urlpatterns = [
     re_path(r'^', include(router.urls)),
     re_path(r'^contact/', include('contact.urls')),
     re_path(r'^content/', include('content.urls')),
+    re_path(r'^country/', include('country.urls')),
+    re_path(r'^state/', include('country.urls')),
+    re_path(r'^city/', include('country.urls')),
+    re_path(r'^urban/', include('country.urls')),
     re_path(r'^api/', include('api.urls')),
+    re_path(r'^university/', include('university.urls')),
+    re_path(r'^college/', include('colleges.urls')),
     # re_path(r'^posts/', include('microblog.urls')),
     re_path(r'', include('microblog.urls')),
     path('auth/', include('rest_auth.urls')),
@@ -55,11 +71,7 @@ urlpatterns = [
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + djreservation_urls.urlpatterns
 
-
-
-
 # urlpatterns += + djreservation_urls.urlpatterns
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
