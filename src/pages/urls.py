@@ -3,5 +3,4 @@ from . import views
 
 urlpatterns = [
     url('', views.homePageView, name='home'),
-
 ]

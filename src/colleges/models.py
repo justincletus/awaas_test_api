@@ -18,6 +18,9 @@ class College(models.Model):
         on_delete=models.SET_NULL
     )
 
+    def get_absolute_url(self):
+        return reverse('college-detail-view', args=[str(self.id)])
+
     def __str__(self):
         return self.college_name
 

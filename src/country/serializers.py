@@ -10,16 +10,20 @@ class CountrySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'slug']
 
 class StateSerializer(serializers.ModelSerializer):
+    country_id = CountrySerializer(many=True, read_only=True)
     class Meta:
         model = State
-        fields = ['id', 'state_name']
+        fields = ['id', 'state_name', 'country_id']
 
 class CitySerializer(serializers.ModelSerializer):
+    state_id = StateSerializer(many=True, read_only=True)
     class Meta:
         model = City
-        fields = ['id', 'city_name']
+        fields = ['id', 'city_name', 'state_id']
 
 class UrbanSerializer(serializers.ModelSerializer):
+    state_id = StateSerializer(many=True, read_only=True)
+
     class Meta:
         model = Urban
-        fields = ['id', 'urban_name']
+        fields = ['id', 'urban_name', 'state_id']

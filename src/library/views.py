@@ -124,16 +124,16 @@ def user_account_detail(request):
     paginate_by = 5
 
     Bookinstance_details = BookInstance.objects.filter(borrower=request.user).values('book_id').get()
-    
+
     book_detail = Book.objects.filter(id=Bookinstance_details['book_id']).get()
-    
+
     user_object = BookInstance.objects.filter(borrower=request.user).filter(status__exact='r').order_by('due_back')
-    
+
     due_back = datetime.today()+timedelta(days=15)
     print(due_back)
 
     context = {
-        "object": user_object,        
+        "object": user_object,
     }
 
     return render(request, "library/my-book-detail.html", context, {
@@ -154,11 +154,11 @@ def pre_booking_detail(request, id):
     user = User.objects.get(pk=current_user.id)
     profile = Profile.objects.filter(user=user).get()
 
-    obj = get_object_or_404(BookInstance, book=booking.book)    
+    obj = get_object_or_404(BookInstance, book=booking.book)
     due_back = datetime.today()+timedelta(days=15)
     form = BookInstanceForm(request.POST or None, instance=obj)
     if request.method == 'POST':
-        if form.is_valid():            
+        if form.is_valid():
             obj.due_back = due_back
             obj.borrower = request.user
             obj.status = 'r'
@@ -166,7 +166,7 @@ def pre_booking_detail(request, id):
 
             booking_status = {
                 "messages": "You have renewed the book."
-            }    
+            }
             messages.success(request, f'Your of {booking.book} renewed.')
             return redirect('/library/mybooks/')
 
@@ -175,7 +175,7 @@ def pre_booking_detail(request, id):
 
     else:
         return render(request, "library/pre_booking.html", context)
-    
+
     return render(request, "library/pre_booking.html", context)
 
 class MyObjectReservation(ProductReservationView):
