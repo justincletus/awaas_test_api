@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework import viewsets
+from rest_framework import status, generics, mixins, viewsets
 from .models import College
 from .serializers import CollegeSerializer
 from rest_framework.response import Response

@@ -6,7 +6,6 @@ from django.db.models.signals import pre_save
 
 # Create your models here.
 
-
 class University(models.Model):
     name = models.CharField(
         max_length=100,
@@ -18,6 +17,9 @@ class University(models.Model):
     state_id = models.ForeignKey('country.State', null=True, blank=True, default=None, on_delete=models.SET_NULL)
     college_id = models.ForeignKey('colleges.College', null=True, blank=True, default=None, on_delete=models.SET_NULL)
     university_type = models.ForeignKey('university.UniversityType', null=True, blank=True, default=None, on_delete=models.SET_NULL)
+
+    def get_absolute_url(self):
+        return reverse('university-detail-view', args=[str(self.id)])
 
     def __str__(self):
         return self.name
