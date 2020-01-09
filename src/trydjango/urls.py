@@ -64,7 +64,7 @@ urlpatterns = [
     re_path(r'^country/', include('country.urls')),
     # path('country/state/', include('country.urls')),
     # re_path(r'^country/state/', include('country.urls')),
-    # path('city/', include('country.urls')),
+    # re_path(r'^city/', include('country.urls')),
     # path('urban/', include('country.urls')),
     re_path(r'^api/', include('api.urls')),
     re_path(r'^university/', include('university.urls')),
@@ -80,7 +80,10 @@ urlpatterns = [
     # re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     re_path(r'^courses/$', course_view.course_list),
     re_path(r'^course/(?P<pk>[0-9]+)$', course_view.course_detail),
-    re_path(r'^state_list/(?P<pk>[0-9]+)$', country_views.StateByCountry)
+    re_path(r'^state_list/(?P<slug>[-\w]+)/$', country_views.StateByCountry),
+    re_path(r'^state_list_country_id/(?P<pk>[0-9]+)$', country_views.StateByCountryId),
+    re_path(r'^city_list/(?P<pk>[0-9]+)$', country_views.CityByState),
+    re_path(r'^urban_list/(?P<pk>[0-9]+)$', country_views.UrbanByState)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + djreservation_urls.urlpatterns
 
@@ -89,4 +92,3 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

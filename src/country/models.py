@@ -22,6 +22,7 @@ class State(models.Model):
         help_text="Enter the state name",
         unique=True
     )
+    slug = models.SlugField()
     country_id = models.ForeignKey('Country', null=True, blank=True, default=None, on_delete=models.SET_NULL)
 
 
@@ -59,3 +60,12 @@ def pre_save_receiver(sender, instance, *args, **kwargs):
         instance.slug = slug
 
 pre_save.connect(pre_save_receiver, sender=Country)
+
+def pre_save_state_receiver(sender, instance, *args, **kwargs):
+    slug = slugify(instance.state_name)
+    exists = State.objects.filter(slug=slug).exists()
+    if exists:
+        slug = "%s-%s" %(slug, instance.id)
+        instance.slug = slug
+
+pre_save.connect(pre_save_state_receiver, sender=State)
