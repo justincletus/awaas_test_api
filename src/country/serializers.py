@@ -8,12 +8,24 @@ class CountrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Country
         fields = ['id', 'name', 'slug']
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {
+                'lookup_field': 'slug'
+            }
+        }
 
-class StateSerializer(serializers.ModelSerializer):
+class StateSerializer(serializers.HyperlinkedModelSerializer):
     country_id = CountrySerializer(many=True, read_only=True)
     class Meta:
         model = State
         fields = ['id', 'state_name', 'country_id']
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {
+                'lookup_field': 'slug'
+            }
+        }
 
 class CitySerializer(serializers.ModelSerializer):
     state_id = StateSerializer(many=True, read_only=True)

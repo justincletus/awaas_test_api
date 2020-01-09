@@ -12,7 +12,7 @@ def product_create_view(request):
         form.save()
         form = ProductForm()
         return redirect('../')
-    
+
     context = {
         'form': form
     }
@@ -26,7 +26,7 @@ def product_update_view(request, slug):
     if form.is_valid():
         form.save()
         return redirect('../../')
-    
+
     context = {
         'form': form
     }
@@ -49,10 +49,10 @@ def product_detail_view(request, slug):
         obj = Product.objects.get(slug=slug)
     except:
         raise Http404
-    
+
     result = {
         "object": obj
-    }   
+    }
 
     return render(request, "products/product_detail.html", result)
 
@@ -62,11 +62,9 @@ def product_delete_view(request, slug):
     if request.method == "POST":
         obj.delete()
         return redirect('../../')
-    
+
     result = {
         "object": obj
     }
 
     return render(request, 'products/product_delete.html', result)
-
-

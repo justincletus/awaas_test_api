@@ -7,9 +7,9 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('', include(router.urls)),
-    path(r'^state/(?P<pk>\d+)$', StateDetailsView.as_view()),
-    path(r'^state/(?P<pk>\d+)/update$', StateUpdateView.as_view()),
-    path(r'^state/(?P<pk>\d+)/delete$', StateDestroyView.as_view())
+    # path(r'^state/(?P<pk>\d+)$', StateDetailsView.as_view()),
+    # path(r'^state/(?P<pk>\d+)/update$', StateUpdateView.as_view()),
+    # path(r'^state/(?P<pk>\d+)/delete$', StateDestroyView.as_view())
 
     # path('country/state/', views.StateByCountryViewSet, name='state-list')
 ]
