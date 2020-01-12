@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 from django.urls import reverse
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
@@ -40,6 +41,13 @@ class City(models.Model):
 
     def __str__(self):
         return self.city_name
+
+
+class CityAdmin(admin.ModelAdmin):
+    search_fields = ('city_name', )
+    list_filter = [
+        'state_id'
+    ]
 
 class Urban(models.Model):
     urban_name = models.CharField(

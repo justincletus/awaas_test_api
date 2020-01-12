@@ -31,7 +31,7 @@ class Course(models.Model):
         max_length=10,
         choices=course_choice,
         blank=True,
-        default='FT',
+        default='FullTime',
         help_text='Select Course type.'
     )
     college_id = models.ForeignKey('colleges.College', null=True, blank=True, default=None, on_delete=models.SET_NULL)

@@ -4,4 +4,4 @@ from .models import College
 class CollegeSerializer(serializers.ModelSerializer):
     class Meta:
         model = College
-        fields = ['id', 'college_name', 'university_id']
+        fields = ['id', 'college_name', 'address', 'university_id']
