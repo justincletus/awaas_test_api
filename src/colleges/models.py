@@ -10,7 +10,22 @@ class College(models.Model):
         max_length=100,
         help_text="Enter the college name: "
     )
-    slug = models.SlugField(unique=True, default="college")
+    slug = models.SlugField(unique=False, default="college", max_length=100)
+    address = models.TextField(blank=True, null=True)
+    gra = (
+        ('UG', 'Under Graduate'),
+        ('PG', 'Post Graduate'),
+        ('Ph.D', 'Doctrate'),
+        ('Diploma', 'Diploma'),
+        ('Technical', 'Technical')
+    )
+    graduate = models.CharField(
+        max_length=20,
+        choices=gra,
+        blank=True,
+        default='Under Graduate'
+    )
+
     university_id = models.ForeignKey(
         'university.University',
         null=True,
