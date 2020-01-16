@@ -8,7 +8,8 @@ from django.db.models.signals import pre_save
 class College(models.Model):
     college_name = models.CharField(
         max_length=100,
-        help_text="Enter the college name: "
+        help_text="Enter the college name: ",
+        null=False
     )
     slug = models.SlugField(unique=False, default="college", max_length=100)
     address = models.TextField(blank=True, null=True)
@@ -31,6 +32,15 @@ class College(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL
+    )
+
+    course_id = models.ForeignKey(
+        'courses.Course',
+        default=None,
+        related_name='name',
+         null=True,
+         blank=True,
+         on_delete=models.SET_NULL
     )
 
     def get_absolute_url(self):

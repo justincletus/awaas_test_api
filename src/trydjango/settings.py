@@ -86,7 +86,8 @@ INSTALLED_APPS = [
     'country',
     'university',
     'colleges',
-    'courses'
+    'courses',
+    'category'
 ]
 
 SITE_ID = 2

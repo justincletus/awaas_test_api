@@ -20,7 +20,7 @@ from colleges import views as college_views
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from rest_framework_simplejwt import views as jwt_views
 from courses import views as course_view
-
+from category import views as cat_views
 
 from pages.views import (
     home_view,
@@ -44,6 +44,7 @@ router.register(r'city', country_views.CityViewSet)
 router.register(r'urban', country_views.UrbanViewSet)
 router.register(r'university', university_views.UniversityViewSet)
 router.register(r'colleges', college_views.CollegeViewSet)
+router.register(r'category', cat_views.CategoryViewSet)
 
 # router.register(r'api', api_views.UserViewSet)
 
