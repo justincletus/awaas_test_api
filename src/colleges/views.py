@@ -12,6 +12,7 @@ from university.models import University
 from country.models import Country
 from country.models import State
 from country.models import City
+from courses.models import Course
 
 # Create your views here.
 
@@ -32,11 +33,26 @@ class CollegeViewSet(viewsets.ModelViewSet):
 
         colleges = College.objects.all()
 
-        # college_list = main()
-        # for coll in college_list:
-        #     college_update = College(college_name=coll[2].replace("\n", ""), address=coll[3].replace("\n", ""), university_id=university)
+        course = get_object_or_404(Course, id=2)
+        print(course)
+
+        # for college in colleges:
+        #     if college.college_name == '':
+        #         # college_update = College(course_id=course)
+        #         try:
+        #             college.delete()
+        #         except:
+        #             print('some issue in delete.')
+
+        # for college in colleges:
+        #     college_update = College(graduate='Under Graduate', course_id=course)
+        #
+        # # college_list = main()
+        # # for coll in college_list:
+        # #     college_update = College(college_name=coll[2].replace("\n", ""), address=coll[3].replace("\n", ""), university_id=university)
         #     try:
-        #         college_update.save()
+        #         if college.college_name is None:
+        #             college.delete()
         #     except:
         #         print('some issue in save data')
 
