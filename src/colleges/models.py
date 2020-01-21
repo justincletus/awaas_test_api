@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 from django.urls import reverse
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
@@ -48,6 +49,13 @@ class College(models.Model):
 
     def __str__(self):
         return self.college_name
+
+
+class CollegeAdmin(admin.ModelAdmin):
+    search_fields = ('college_name', )
+    list_filter = [
+        'university_id'
+    ]
 
 def pre_save_receiver(sender, instance, *args, **kwargs):
     slug = slugify(instance.college_name)

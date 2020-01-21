@@ -36,7 +36,7 @@ new_router = custom_url.CustomReadOnlyRouter()
 # new_router.register(r'country/state/', country_views.StateByCountryViewSet)
 
 router.register(r'country', country_views.CountryViewSet)
-router.register(r'state', country_views.StateViewSet)
+router.register(r'states', country_views.StateViewSet)
 
 # router.register(r'country/state/', country_views.StateByCountryViewSet)
 # router.register(r'state_country', country_views.StateByCountry, 'State')
@@ -81,7 +81,10 @@ urlpatterns = [
     # re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     re_path(r'^courses/$', course_view.course_list),
     re_path(r'^course/(?P<pk>[0-9]+)$', course_view.course_detail),
+    re_path(r'^course/(?P<slug>[-\w]+)$', course_view.course_detail_slug),
     re_path(r'^state_list/(?P<slug>[-\w]+)/$', country_views.StateByCountry),
+    re_path(r'^university_list/(?P<slug>[-\w]+)$', university_views.StateByUniversity),
+    re_path(r'^colleges_list/(?P<slug>[-\w]+)$', college_views.CollegesByUniversity),
     re_path(r'^state_list_country_id/(?P<pk>[0-9]+)$', country_views.StateByCountryId),
     re_path(r'^city_list/(?P<pk>[0-9]+)$', country_views.CityByState),
     re_path(r'^urban_list/(?P<pk>[0-9]+)$', country_views.UrbanByState)

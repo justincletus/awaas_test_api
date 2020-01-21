@@ -97,3 +97,36 @@ def course_detail(request, pk):
     elif request.method == 'DELETE':
         course.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def course_detail_slug(request, slug):
+    try:
+        course = Course.objects.get(slug=slug)
+    except Course.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = CourseSerializer(
+            course,
+            context={
+                'request': request
+            }
+        )
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = CourseSerializer(
+            course,
+            data=request.data,
+            context={
+                'request': request
+            }
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        course.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

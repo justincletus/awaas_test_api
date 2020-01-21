@@ -14,6 +14,9 @@ class Country(models.Model):
     )
     slug = models.SlugField(unique=True)
 
+    def get_absolute_url(self):
+        return reverse('country-detail-view', args=[str(self.id)])
+
     def __str__(self):
         return self.name
 
@@ -26,6 +29,8 @@ class State(models.Model):
     slug = models.SlugField()
     country_id = models.ForeignKey('Country', null=True, blank=True, default=None, on_delete=models.SET_NULL)
 
+    def get_absolute_url(self):
+        return reverse('country-detail-view', args=[str(self.id)])
 
     def __str__(self):
         return self.state_name
@@ -37,7 +42,11 @@ class City(models.Model):
         help_text="Enter the state name",
         unique=True
     )
+    slug = models.SlugField(unique=True)
     state_id = models.ForeignKey('State', null=True, blank=True, default=None, on_delete=models.SET_NULL)
+
+    def get_absolute_url(self):
+        return reverse('country-detail-view', args=[str(self.id)])
 
     def __str__(self):
         return self.city_name
@@ -55,6 +64,9 @@ class Urban(models.Model):
         help_text="Enter the state name"
     )
     state_id = models.ForeignKey('State', null=True, blank=True, default=None, on_delete=models.SET_NULL)
+
+    def get_absolute_url(self):
+        return reverse('country-detail-view', args=[str(self.id)])
 
     def __str__(self):
         return self.urban_name
