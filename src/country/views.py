@@ -76,15 +76,15 @@ class StateViewSet(viewsets.ModelViewSet):
         serializer = StateSerializer(state, many=True)
         return Response(serializer.data)
 
-    def get_queryset(self):
-        c_id = self.kwargs.get('slug', None)
-        if c_id is not None:
-            states = get_object_or_404(State, country_id=c_id)
-            return State.objects.filter(
-
-            )
-        else:
-            return State.objects.none()
+    # def get_queryset(self):
+    #     c_id = self.kwargs.get('slug', None)
+    #     if c_id is not None:
+    #         states = get_object_or_404(State, country_id=c_id)
+    #         return State.objects.filter(
+    #
+    #         )
+    #     else:
+    #         return State.objects.none()
 
 class StateDestroyView(DestroyAPIView):
     queryset = State.objects.all()
@@ -155,6 +155,7 @@ def StateByCountry(request, slug):
 
         # serializer = StateSerializer(states)
         # return Response(serializer.data)
+
 
 @api_view(['GET'])
 def CityByState(request, pk):

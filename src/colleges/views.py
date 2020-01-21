@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from rest_framework import status, generics, mixins, viewsets
 from .models import College
 from .serializers import CollegeSerializer
@@ -19,6 +19,7 @@ from courses.models import Course
 class CollegeViewSet(viewsets.ModelViewSet):
     queryset = College.objects.all()
     serializer_class = CollegeSerializer
+    lookup_field = 'slug'
 
     def list(self, request, *args, **kwargs):
 
@@ -58,3 +59,15 @@ class CollegeViewSet(viewsets.ModelViewSet):
 
         serializer = CollegeSerializer(colleges, many=True)
         return Response(serializer.data)
+
+@api_view(['GET'])
+def CollegesByUniversity(request, slug):
+    try:
+        university = University.objects.get(slug=slug)
+        colleges = College.objects.filter(university_id=university).values('id', 'college_name', 'slug')
+
+    except University.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        colleges = list(colleges.values())
+        return JsonResponse(colleges, safe=False)
