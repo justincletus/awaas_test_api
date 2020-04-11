@@ -3,18 +3,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser
-# from django.contrib.auth.models import AbstractBaseUser
-
-# class CustomUser(AbstractUser):
-
-#     def __str__(self):
-#         return self.email
-
-# Create your models here.
-# class User(AbstractUser):
-#     token = models.CharField(max_length=200, blank=True, null=True)
-#     is_active = models.BooleanField(default=False, null=True)
-
 
 class Profile(models.Model):
     user            = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -24,11 +12,7 @@ class Profile(models.Model):
     email_confirmed = models.BooleanField(default=False)
     image           = models.ImageField(default='default.jpg', upload_to='profile_pic')
     token           = models.CharField(max_length=200, blank=True, null=True)
-    is_active       = models.BooleanField(default=False, null=True)
-
-    
-    # def __str__(self):
-    #     return self.email_confirmed
+    is_active       = models.BooleanField(default=False, null=True)    
     
     def __str__(self):
         return f'{self.user.username} Profile'

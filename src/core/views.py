@@ -12,49 +12,22 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse, Http404
 from .models import Profile
 from django.contrib.auth.models import User
+from rest_framework import status
+from rest_framework.response import Response
 
 
-from core.forms import SignupForm
+from .forms import SignupForm
 # Create your views here.
 
 def signup(request):
     if request.method == "POST":
         form = SignupForm(request.POST)
-        # print(form)
         if form.is_valid():
             user = form.save()
-
-            user.refresh_from_db()
-            user.profile.is_active = False
-            token = account_activation_token.make_token(user)             
-            user.profile.token = token
-            user.is_active = False           
-            user.profile.save()
-            
-            current_site = get_current_site(request)
-            mail_subject = 'Activate your account.'
-            message = render_to_string('core/acc_active_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': token,
-            })
-            
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(
-                        mail_subject, message, to=[to_email]
-            )
-            
-            email.send()
             context = {
-                "message": "Please confirm your email address to complete the registration."
+                'message': 'user saved successfully'
             }
-            return render(request, 'core/send_email.html', context)
-
-            #return HttpResponse('Please confirm your email address to complete the registration')
-            # login(request, user)
-            # messages.success(request, f'Account is created for {username}!')
-            # return redirect('login')
+            return Response(context, status=status.HTTP_201_CREATED)            
     else:
         form = SignupForm()
     return render(request, 'signup.html', {'form': form})

@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 class SignupForm(UserCreationForm):
     username = forms.CharField(max_length=120, required=True, help_text="Enter the username")
     email = forms.EmailField(max_length=254, help_text="Enter the valid email address")
-    # password1 = forms.PasswordInput(help_text="Enter your password")
     password1 = forms.PasswordInput(attrs={'placeholder': 'Password', 'class': 'form-control'})
     password2 = forms.PasswordInput(attrs={'placeholder': 'Confirm Password', 'class': 'form-control'})
 
@@ -13,7 +12,7 @@ class SignupForm(UserCreationForm):
     class Meta:
         model = User
         fields = (
-            'username',            
+            'username',     
             'email',
             'password1',
             'password2'
@@ -21,6 +20,3 @@ class SignupForm(UserCreationForm):
     
     def __init__(self, *args, **kargs):
         super(SignupForm, self).__init__(*args, **kargs)
-        # self.fields['password1'].widget = PasswordInput(attrs={'placeholder': 'Password', 'class': 'form-control'})
-        # self.fields['password2'].widget = PasswordInput(attrs={'placeholder': 'Confirm Password', 'class': 'form-control'})
-
