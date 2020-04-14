@@ -39,12 +39,14 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    '35.225.93.6'
+    '35.225.93.6',
+    'awaas.myproperties.site'
 ]
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:4200",
     "http://127.0.0.1:4200",
+    "http://awaas.myproperties.site"
 ]
 
 # Application definition
