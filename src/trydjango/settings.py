@@ -38,7 +38,8 @@ SECRET_KEY = 'zgi#y!g#r(*=4(rzw4+-lg1u(4g@1wkckwuzoi45ephq)u+u^6'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1',
+    '35.225.93.6'
 ]
 
 CORS_ORIGIN_WHITELIST = [
